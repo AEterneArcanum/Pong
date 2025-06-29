@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://cmeu686jb8ym"
+path="res://.godot/imported/Shavian24.fnt-0f8923b760ce84682177a78d2ae223da.fontdata"
+
+[deps]
+
+source_file="res://Fonts/Shavian24.fnt"
+dest_files=["res://.godot/imported/Shavian24.fnt-0f8923b760ce84682177a78d2ae223da.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

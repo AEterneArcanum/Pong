@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://gkt8kgd3seai"]
+
+[ext_resource type="Script" path="res://Scripts/paddle_texture.gd" id="1_1eevm"]
+[ext_resource type="Script" path="res://Scripts/paddle.gd" id="1_ycndd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4sp3"]
+size = Vector2(10, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ws0rc"]
+size = Vector2(10, 80)
+
+[node name="Paddle" type="Node2D"]
+script = ExtResource("1_ycndd")
+
+[node name="PaddleA" type="Area2D" parent="."]
+script = ExtResource("1_1eevm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddleA"]
+shape = SubResource("RectangleShape2D_d4sp3")
+
+[node name="PaddleB" type="Area2D" parent="."]
+script = ExtResource("1_1eevm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddleB"]
+shape = SubResource("RectangleShape2D_ws0rc")
+
+[connection signal="area_entered" from="PaddleA" to="." method="_on_paddle_a_area_entered"]
+[connection signal="area_entered" from="PaddleB" to="." method="_on_paddle_b_area_entered"]

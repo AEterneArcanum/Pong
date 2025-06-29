@@ -1,0 +1,108 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxojkm6e2oqff"]
+
+[ext_resource type="PackedScene" uid="uid://gkt8kgd3seai" path="res://paddle.tscn" id="1_1s86a"]
+[ext_resource type="Script" path="res://Scripts/arena.gd" id="1_t1053"]
+[ext_resource type="PackedScene" uid="uid://c3w1hunvt3p4" path="res://ball.tscn" id="2_y4wbr"]
+[ext_resource type="FontFile" uid="uid://cmeu686jb8ym" path="res://Fonts/Shavian24.fnt" id="4_2avt1"]
+[ext_resource type="FontFile" uid="uid://cpcswuobvnbll" path="res://Fonts/Shavian96.fnt" id="5_phpeq"]
+[ext_resource type="Script" path="res://Scripts/blinking.gd" id="6_mglga"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfqs6"]
+radius = 320.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_rp2pr"]
+font = ExtResource("4_2avt1")
+font_size = 24
+font_color = Color(0, 1, 1, 0)
+outline_size = 1
+outline_color = Color(0, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kbi2k"]
+font = ExtResource("5_phpeq")
+font_size = 96
+font_color = Color(0, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3xpjn"]
+font = ExtResource("5_phpeq")
+font_size = 96
+font_color = Color(0, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ka8tw"]
+font = ExtResource("5_phpeq")
+font_size = 96
+font_color = Color(0, 1, 1, 1)
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_t1053")
+
+[node name="Paddle" parent="." node_paths=PackedStringArray("Ball") instance=ExtResource("1_1s86a")]
+action_counter_clockwise = "inp_clockwise"
+action_clockwise = "inp_counter_clockwise"
+Ball = NodePath("../Ball")
+arm_speed = 2.5
+
+[node name="Ball" parent="." node_paths=PackedStringArray("Paddle") instance=ExtResource("2_y4wbr")]
+Paddle = NodePath("../Paddle")
+Step = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bounds" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds"]
+shape = SubResource("CircleShape2D_nfqs6")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreCard" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = -569.0
+offset_top = -319.0
+offset_right = -523.0
+offset_bottom = -295.0
+text = "𐑕𐑒𐑹 …"
+label_settings = SubResource("LabelSettings_rp2pr")
+
+[node name="PressStartView" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PressStart" type="Label" parent="UI/PressStartView"]
+layout_mode = 0
+offset_left = -119.0
+offset_top = 102.0
+offset_right = 192.0
+offset_bottom = 198.0
+text = "𐑐𐑮𐑧𐑕 𐑕𐑑𐑸𐑑…"
+label_settings = SubResource("LabelSettings_kbi2k")
+script = ExtResource("6_mglga")
+
+[node name="EndScoreCard" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = -152.0
+offset_top = -247.0
+offset_right = 155.0
+offset_bottom = -151.0
+text = "𐑘𐑹 𐑕𐑒𐑹 : …"
+label_settings = SubResource("LabelSettings_3xpjn")
+
+[node name="HighScoreCard" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = -138.0
+offset_top = -152.0
+offset_right = 156.0
+offset_bottom = -56.0
+text = "𐑣𐑲 𐑕𐑒𐑹 : …"
+label_settings = SubResource("LabelSettings_ka8tw")
+
+[connection signal="on_paddle_hit" from="Paddle" to="." method="_on_paddle_on_paddle_hit"]
+[connection signal="on_ball_hit" from="Ball" to="." method="_on_ball_on_ball_hit"]
+[connection signal="area_exited" from="Bounds" to="." method="_on_bounds_area_exited"]

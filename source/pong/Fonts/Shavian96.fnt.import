@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://cpcswuobvnbll"
+path="res://.godot/imported/Shavian96.fnt-465a4e083c59c37157e3bf24dd1c380f.fontdata"
+
+[deps]
+
+source_file="res://Fonts/Shavian96.fnt"
+dest_files=["res://.godot/imported/Shavian96.fnt-465a4e083c59c37157e3bf24dd1c380f.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2
